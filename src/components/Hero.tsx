@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Users, Sparkles } from "lucide-react";
 import heroImage from "@/assets/hero-cleaner.jpg";
+import logo from "@/assets/logo.png";
 
 const Hero = () => {
   const scrollToBooking = () => {
@@ -11,8 +12,24 @@ const Hero = () => {
   return (
     <section className="relative min-h-[600px] bg-gradient-to-br from-[hsl(var(--hero-gradient-from))] to-[hsl(var(--hero-gradient-to))] py-20 px-6 overflow-hidden">
       <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
+      
+      {/* Background Logo Element */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] opacity-[0.03] pointer-events-none animate-pulse">
+        <img src={logo} alt="" className="w-full h-full object-contain" />
+      </div>
+
+      {/* Floating Watermark Logo */}
+      <div className="absolute bottom-8 right-8 w-24 h-24 md:w-32 md:h-32 opacity-10 pointer-events-none animate-fade-in">
+        <img src={logo} alt="" className="w-full h-full object-contain" />
+      </div>
+
       <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center">
         <div className="space-y-6 z-10 animate-fade-in">
+          {/* Logo Integrated with Content */}
+          <div className="flex items-center gap-4 mb-4">
+            <img src={logo} alt="Freshshine Solutions" className="h-16 w-auto animate-fade-in" />
+          </div>
+          
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
             Professional Domestic and Commercial Cleaning Services
           </h1>
