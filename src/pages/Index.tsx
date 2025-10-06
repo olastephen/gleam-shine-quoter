@@ -1,6 +1,11 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
+import HowItWorks from "@/components/HowItWorks";
+import CleanPromise from "@/components/CleanPromise";
+import BeforeAfterGallery from "@/components/BeforeAfterGallery";
+import Testimonials from "@/components/Testimonials";
+import FAQs from "@/components/FAQs";
 import BookingForm from "@/components/BookingForm";
 import Footer from "@/components/Footer";
 
@@ -11,6 +16,11 @@ const Index = () => {
       <main className="flex-1">
         <Hero />
         <Services />
+        <HowItWorks />
+        <CleanPromise />
+        <BeforeAfterGallery />
+        <Testimonials />
+        <FAQs />
         <BookingForm />
       </main>
       <Footer />

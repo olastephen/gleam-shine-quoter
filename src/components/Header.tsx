@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Sparkles } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 const Header = () => {
   const scrollToBooking = () => {
@@ -8,18 +8,21 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-primary text-primary-foreground py-4 px-6 sticky top-0 z-50 shadow-md">
+    <header className="bg-card/80 backdrop-blur-lg border-b border-glass-border py-4 px-6 sticky top-0 z-50 shadow-lg">
       <nav className="container mx-auto flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <Sparkles className="h-6 w-6" />
-          <span className="text-xl font-bold">CleanPro Services</span>
+        <div className="flex items-center gap-3">
+          <img src={logo} alt="Freshshine Solutions" className="h-12 w-auto" />
         </div>
         <div className="hidden md:flex items-center gap-6">
-          <a href="#services" className="hover:text-accent transition-colors">Services</a>
-          <a href="#about" className="hover:text-accent transition-colors">About</a>
-          <a href="#contact" className="hover:text-accent transition-colors">Contact</a>
+          <a href="#services" className="text-foreground hover:text-primary transition-colors font-medium">Services</a>
+          <a href="#how-it-works" className="text-foreground hover:text-primary transition-colors font-medium">How It Works</a>
+          <a href="#faqs" className="text-foreground hover:text-primary transition-colors font-medium">FAQs</a>
         </div>
-        <Button onClick={scrollToBooking} variant="secondary" size="lg">
+        <Button 
+          onClick={scrollToBooking} 
+          className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-xl transition-all"
+          size="lg"
+        >
           Book a Clean
         </Button>
       </nav>

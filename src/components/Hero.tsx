@@ -10,12 +10,13 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-[600px] bg-gradient-to-br from-[hsl(var(--hero-gradient-from))] to-[hsl(var(--hero-gradient-to))] py-20 px-6 overflow-hidden">
+      <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
       <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center">
-        <div className="space-y-6 z-10">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary leading-tight">
+        <div className="space-y-6 z-10 animate-fade-in">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
             Professional Domestic and Commercial Cleaning Services
           </h1>
-          <p className="text-lg text-foreground/80 max-w-xl">
+          <p className="text-lg text-muted-foreground max-w-xl">
             Cleaning and handyman tasks booked and performed by experienced providers who are highly rated by customers like you.
           </p>
           <div className="flex items-center gap-3">
@@ -30,32 +31,41 @@ const Hero = () => {
             </div>
           </div>
           <div className="flex gap-4 pt-4">
-            <Button onClick={scrollToBooking} variant="secondary" size="lg" className="shadow-lg hover:shadow-xl transition-shadow">
+            <Button 
+              onClick={scrollToBooking} 
+              size="lg" 
+              className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-xl hover:shadow-2xl transition-all hover:-translate-y-1"
+            >
               Book a Clean
             </Button>
-            <Button onClick={scrollToBooking} variant="outline" size="lg" className="bg-background/50 backdrop-blur-sm">
+            <Button 
+              onClick={scrollToBooking} 
+              variant="outline" 
+              size="lg" 
+              className="bg-card/60 backdrop-blur-lg border-glass-border hover:bg-card/80 transition-all hover:-translate-y-1"
+            >
               Get a Quote
             </Button>
           </div>
         </div>
-        <div className="relative">
-          <div className="relative rounded-full overflow-hidden w-full max-w-md mx-auto aspect-square shadow-2xl border-4 border-accent/30">
+        <div className="relative animate-fade-in" style={{ animationDelay: "200ms" }}>
+          <div className="relative rounded-full overflow-hidden w-full max-w-md mx-auto aspect-square shadow-2xl border-4 border-primary/20">
             <img 
               src={heroImage} 
               alt="Professional cleaning service expert" 
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
             />
           </div>
-          <div className="absolute top-10 -left-4 bg-background rounded-xl shadow-lg p-4 animate-pulse">
+          <div className="absolute top-10 -left-4 bg-card/80 backdrop-blur-lg border border-glass-border rounded-xl shadow-xl p-4 animate-pulse">
             <div className="flex items-center gap-2">
               <Sparkles className="h-5 w-5 text-accent" />
-              <span className="font-semibold text-sm">Spotless Results</span>
+              <span className="font-semibold text-sm text-foreground">Spotless Results</span>
             </div>
           </div>
-          <div className="absolute bottom-10 -right-4 bg-background rounded-xl shadow-lg p-4 animate-pulse delay-150">
+          <div className="absolute bottom-10 -right-4 bg-card/80 backdrop-blur-lg border border-glass-border rounded-xl shadow-xl p-4 animate-pulse" style={{ animationDelay: "150ms" }}>
             <div className="flex items-center gap-2">
               <Users className="h-5 w-5 text-accent" />
-              <span className="font-semibold text-sm">Industry Experts</span>
+              <span className="font-semibold text-sm text-foreground">Industry Experts</span>
             </div>
           </div>
         </div>
