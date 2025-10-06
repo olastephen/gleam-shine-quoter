@@ -6,6 +6,7 @@ import CleanPromise from "@/components/CleanPromise";
 import BeforeAfterGallery from "@/components/BeforeAfterGallery";
 import Testimonials from "@/components/Testimonials";
 import FAQs from "@/components/FAQs";
+import LocationMap from "@/components/LocationMap";
 import BookingForm from "@/components/BookingForm";
 import Footer from "@/components/Footer";
 
@@ -21,6 +22,7 @@ const Index = () => {
         <BeforeAfterGallery />
         <Testimonials />
         <FAQs />
+        <LocationMap />
         <BookingForm />
       </main>
       <Footer />
