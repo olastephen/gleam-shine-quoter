@@ -25,11 +25,6 @@ const Hero = () => {
 
       <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center">
         <div className="space-y-6 z-10 animate-fade-in">
-          {/* Logo Integrated with Content */}
-          <div className="flex items-center gap-4 mb-4">
-            <img src={logo} alt="Freshshine Solutions" className="h-16 w-auto animate-fade-in" />
-          </div>
-          
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
             Professional Domestic and Commercial Cleaning Services
           </h1>
