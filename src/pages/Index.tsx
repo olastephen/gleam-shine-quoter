@@ -9,6 +9,7 @@ import FAQs from "@/components/FAQs";
 import LocationMap from "@/components/LocationMap";
 import BookingForm from "@/components/BookingForm";
 import Footer from "@/components/Footer";
+import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 
 const Index = () => {
   return (
@@ -26,6 +27,7 @@ const Index = () => {
         <BookingForm />
       </main>
       <Footer />
+      <FloatingWhatsApp />
     </div>
   );
 };
