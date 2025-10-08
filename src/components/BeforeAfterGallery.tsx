@@ -1,9 +1,19 @@
-import beforeImage from "@/assets/gallery/before-new.jpg";
-import afterImage from "@/assets/gallery/after-new.jpg";
+import before1 from "@/assets/gallery/before-new.jpg";
+import after1 from "@/assets/gallery/after-new.jpg";
+import before2 from "@/assets/gallery/before-2.jpg";
+import after2 from "@/assets/gallery/after-2.mp4";
 
 const BeforeAfterGallery = () => {
-  const beforeImage_data = { src: beforeImage, alt: "Before cleaning - Dirty floor area" };
-  const afterImage_data = { src: afterImage, alt: "After cleaning - Spotless clean room" };
+  const transformations = [
+    {
+      before: { src: before1, alt: "Before cleaning - Dirty floor area" },
+      after: { src: after1, alt: "After cleaning - Spotless clean room", type: "image" }
+    },
+    {
+      before: { src: before2, alt: "Before cleaning - Dirty microwave and kitchen" },
+      after: { src: after2, alt: "After cleaning - Sparkling clean appliances", type: "video" }
+    }
+  ];
 
   return (
     <section className="py-12 md:py-20 px-4 md:px-6 bg-gradient-to-b from-background to-muted/30">
@@ -17,33 +27,59 @@ const BeforeAfterGallery = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
-          <div>
-            <h3 className="text-2xl md:text-3xl font-semibold text-foreground mb-6 text-center">Before</h3>
-            <div className="relative overflow-hidden rounded-xl border-2 border-glass-border bg-card/60 backdrop-blur-lg hover:shadow-[var(--shadow-glow)] transition-all duration-500 hover:-translate-y-2 animate-fade-in group">
-              <img
-                src={beforeImage_data.src}
-                alt={beforeImage_data.alt}
-                className="w-full h-96 md:h-[500px] object-cover transition-transform duration-500 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            </div>
-          </div>
+        <div className="space-y-12 md:space-y-16">
+          {transformations.map((transformation, index) => (
+            <div key={index} className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
+              <div>
+                {index === 0 && (
+                  <h3 className="text-2xl md:text-3xl font-semibold text-foreground mb-6 text-center">Before</h3>
+                )}
+                <div 
+                  className="relative overflow-hidden rounded-xl border-2 border-glass-border bg-card/60 backdrop-blur-lg hover:shadow-[var(--shadow-glow)] transition-all duration-500 hover:-translate-y-2 animate-fade-in group"
+                  style={{ animationDelay: `${index * 200}ms` }}
+                >
+                  <img
+                    src={transformation.before.src}
+                    alt={transformation.before.alt}
+                    className="w-full h-80 md:h-96 object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </div>
+              </div>
 
-          <div>
-            <h3 className="text-2xl md:text-3xl font-semibold text-foreground mb-6 text-center bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">After</h3>
-            <div className="relative overflow-hidden rounded-xl border-2 border-primary/30 bg-gradient-to-br from-primary/10 to-secondary/10 backdrop-blur-lg hover:shadow-[var(--shadow-glow)] transition-all duration-500 hover:-translate-y-2 animate-fade-in">
-              <img
-                src={afterImage_data.src}
-                alt={afterImage_data.alt}
-                className="w-full h-96 md:h-[500px] object-cover transition-transform duration-500 hover:scale-110"
-              />
+              <div>
+                {index === 0 && (
+                  <h3 className="text-2xl md:text-3xl font-semibold text-foreground mb-6 text-center bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">After</h3>
+                )}
+                <div 
+                  className="relative overflow-hidden rounded-xl border-2 border-primary/30 bg-gradient-to-br from-primary/10 to-secondary/10 backdrop-blur-lg hover:shadow-[var(--shadow-glow)] transition-all duration-500 hover:-translate-y-2 animate-fade-in"
+                  style={{ animationDelay: `${index * 200 + 100}ms` }}
+                >
+                  {transformation.after.type === "video" ? (
+                    <video
+                      src={transformation.after.src}
+                      className="w-full h-80 md:h-96 object-cover rounded-lg"
+                      controls
+                      loop
+                      playsInline
+                      preload="metadata"
+                    />
+                  ) : (
+                    <img
+                      src={transformation.after.src}
+                      alt={transformation.after.alt}
+                      className="w-full h-80 md:h-96 object-cover transition-transform duration-500 hover:scale-110"
+                    />
+                  )}
+                </div>
+              </div>
             </div>
-            <div className="mt-4 p-4 md:p-6 text-center bg-gradient-to-br from-accent/10 to-primary/10 backdrop-blur-sm border border-accent/20 rounded-xl">
-              <p className="text-sm md:text-base text-muted-foreground">
-                ✨ More amazing transformations coming soon!
-              </p>
-            </div>
+          ))}
+          
+          <div className="p-4 md:p-6 text-center bg-gradient-to-br from-accent/10 to-primary/10 backdrop-blur-sm border border-accent/20 rounded-xl">
+            <p className="text-sm md:text-base text-muted-foreground">
+              ✨ More amazing transformations coming soon!
+            </p>
           </div>
         </div>
       </div>
