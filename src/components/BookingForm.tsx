@@ -6,6 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
 import { Home, Building2, KeyRound, GraduationCap, Hotel, Droplets } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 const services = [
   { id: "domestic", label: "Regular Domestic Cleaning", icon: Home },
@@ -29,7 +30,7 @@ const BookingForm = () => {
     phone: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!selectedService) {
@@ -42,8 +43,40 @@ const BookingForm = () => {
       return;
     }
 
-    toast.success("Quote request submitted! We'll contact you soon.");
-    console.log("Form submitted:", { ...formData, service: selectedService });
+    try {
+      const { error } = await supabase.from("quotes").insert({
+        service_type: selectedService,
+        address: formData.address,
+        postcode: formData.postcode || null,
+        bedrooms: formData.bedrooms || null,
+        bathrooms: formData.bathrooms || null,
+        preferred_date: formData.date || null,
+        preferred_time: formData.time || null,
+        email: formData.email,
+        phone: formData.phone,
+        status: "pending",
+      });
+
+      if (error) throw error;
+
+      toast.success("Quote request submitted! We'll contact you soon.");
+      
+      // Reset form
+      setSelectedService("");
+      setFormData({
+        address: "",
+        postcode: "",
+        bedrooms: "",
+        bathrooms: "",
+        date: "",
+        time: "",
+        email: "",
+        phone: "",
+      });
+    } catch (error) {
+      console.error("Error submitting quote:", error);
+      toast.error("Failed to submit quote. Please try again.");
+    }
   };
 
   const handleInputChange = (field: string, value: string) => {

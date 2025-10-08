@@ -14,7 +14,85 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      quotes: {
+        Row: {
+          id: string
+          created_at: string
+          updated_at: string
+          service_type: string
+          address: string
+          postcode: string | null
+          bedrooms: string | null
+          bathrooms: string | null
+          preferred_date: string | null
+          preferred_time: string | null
+          email: string
+          phone: string
+          status: 'pending' | 'contacted' | 'quoted' | 'approved' | 'rejected' | 'completed'
+          quote_amount: number | null
+          admin_notes: string | null
+          assigned_to: string | null
+        }
+        Insert: {
+          id?: string
+          created_at?: string
+          updated_at?: string
+          service_type: string
+          address: string
+          postcode?: string | null
+          bedrooms?: string | null
+          bathrooms?: string | null
+          preferred_date?: string | null
+          preferred_time?: string | null
+          email: string
+          phone: string
+          status?: 'pending' | 'contacted' | 'quoted' | 'approved' | 'rejected' | 'completed'
+          quote_amount?: number | null
+          admin_notes?: string | null
+          assigned_to?: string | null
+        }
+        Update: {
+          id?: string
+          created_at?: string
+          updated_at?: string
+          service_type?: string
+          address?: string
+          postcode?: string | null
+          bedrooms?: string | null
+          bathrooms?: string | null
+          preferred_date?: string | null
+          preferred_time?: string | null
+          email?: string
+          phone?: string
+          status?: 'pending' | 'contacted' | 'quoted' | 'approved' | 'rejected' | 'completed'
+          quote_amount?: number | null
+          admin_notes?: string | null
+          assigned_to?: string | null
+        }
+      }
+      admin_users: {
+        Row: {
+          id: string
+          created_at: string
+          email: string
+          full_name: string | null
+          role: 'admin' | 'super_admin'
+        }
+        Insert: {
+          id: string
+          created_at?: string
+          email: string
+          full_name?: string | null
+          role?: 'admin' | 'super_admin'
+        }
+        Update: {
+          id?: string
+          created_at?: string
+          email?: string
+          full_name?: string | null
+          role?: 'admin' | 'super_admin'
+        }
+      }
     }
     Views: {
       [_ in never]: never
