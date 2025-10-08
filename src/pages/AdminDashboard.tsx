@@ -165,57 +165,57 @@ const AdminDashboard = () => {
     <div className="min-h-screen bg-gray-50">
       <header className="bg-white shadow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-gray-900">Admin Dashboard</h1>
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Admin Dashboard</h1>
           <Button onClick={handleLogout} variant="outline" size="sm">
-            <LogOut className="h-4 w-4 mr-2" />
-            Logout
+            <LogOut className="h-4 w-4 sm:mr-2" />
+            <span className="hidden sm:inline">Logout</span>
           </Button>
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8">
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-8">
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4 mb-6 sm:mb-8">
           <Card>
             <CardHeader className="pb-2">
-              <CardDescription>Total Quotes</CardDescription>
-              <CardTitle className="text-3xl">{stats.total}</CardTitle>
+              <CardDescription className="text-xs sm:text-sm">Total Quotes</CardDescription>
+              <CardTitle className="text-2xl sm:text-3xl">{stats.total}</CardTitle>
             </CardHeader>
           </Card>
           <Card>
             <CardHeader className="pb-2">
-              <CardDescription>Pending</CardDescription>
-              <CardTitle className="text-3xl text-yellow-600">{stats.pending}</CardTitle>
+              <CardDescription className="text-xs sm:text-sm">Pending</CardDescription>
+              <CardTitle className="text-2xl sm:text-3xl text-yellow-600">{stats.pending}</CardTitle>
             </CardHeader>
           </Card>
           <Card>
             <CardHeader className="pb-2">
-              <CardDescription>Contacted</CardDescription>
-              <CardTitle className="text-3xl text-blue-600">{stats.contacted}</CardTitle>
+              <CardDescription className="text-xs sm:text-sm">Contacted</CardDescription>
+              <CardTitle className="text-2xl sm:text-3xl text-blue-600">{stats.contacted}</CardTitle>
             </CardHeader>
           </Card>
           <Card>
             <CardHeader className="pb-2">
-              <CardDescription>Quoted</CardDescription>
-              <CardTitle className="text-3xl text-purple-600">{stats.quoted}</CardTitle>
+              <CardDescription className="text-xs sm:text-sm">Quoted</CardDescription>
+              <CardTitle className="text-2xl sm:text-3xl text-purple-600">{stats.quoted}</CardTitle>
             </CardHeader>
           </Card>
-          <Card>
+          <Card className="col-span-2 lg:col-span-1">
             <CardHeader className="pb-2">
-              <CardDescription>Approved</CardDescription>
-              <CardTitle className="text-3xl text-green-600">{stats.approved}</CardTitle>
+              <CardDescription className="text-xs sm:text-sm">Approved</CardDescription>
+              <CardTitle className="text-2xl sm:text-3xl text-green-600">{stats.approved}</CardTitle>
             </CardHeader>
           </Card>
         </div>
 
         {/* Filter */}
-        <Card className="mb-6">
-          <CardHeader>
-            <CardTitle>Filter Quotes</CardTitle>
+        <Card className="mb-4 sm:mb-6">
+          <CardHeader className="pb-3">
+            <CardTitle className="text-lg">Filter Quotes</CardTitle>
           </CardHeader>
           <CardContent>
             <Select value={filterStatus} onValueChange={setFilterStatus}>
-              <SelectTrigger className="w-64">
+              <SelectTrigger className="w-full sm:w-64">
                 <SelectValue placeholder="Filter by status" />
               </SelectTrigger>
               <SelectContent>
@@ -234,8 +234,8 @@ const AdminDashboard = () => {
         {/* Quotes Table */}
         <Card>
           <CardHeader>
-            <CardTitle>All Quote Requests</CardTitle>
-            <CardDescription>
+            <CardTitle className="text-lg">All Quote Requests</CardTitle>
+            <CardDescription className="text-sm">
               Manage and respond to customer quote requests
             </CardDescription>
           </CardHeader>
@@ -245,68 +245,131 @@ const AdminDashboard = () => {
             ) : filteredQuotes.length === 0 ? (
               <div className="text-center py-8 text-gray-500">No quotes found</div>
             ) : (
-              <div className="overflow-x-auto">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Date</TableHead>
-                      <TableHead>Customer</TableHead>
-                      <TableHead>Service</TableHead>
-                      <TableHead>Address</TableHead>
-                      <TableHead>Status</TableHead>
-                      <TableHead>Quote Amount</TableHead>
-                      <TableHead>Actions</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {filteredQuotes.map((quote) => (
-                      <TableRow key={quote.id}>
-                        <TableCell className="whitespace-nowrap">
-                          {new Date(quote.created_at).toLocaleDateString()}
-                        </TableCell>
-                        <TableCell>
-                          <div className="flex flex-col">
-                            <span className="font-medium">{quote.email}</span>
-                            <span className="text-sm text-gray-500">{quote.phone}</span>
-                          </div>
-                        </TableCell>
-                        <TableCell className="capitalize">
-                          {quote.service_type.replace(/([A-Z])/g, " $1").trim()}
-                        </TableCell>
-                        <TableCell className="max-w-xs truncate">
-                          {quote.address}
-                        </TableCell>
-                        <TableCell>
-                          <Badge className={statusColors[quote.status]}>
-                            {quote.status}
-                          </Badge>
-                        </TableCell>
-                        <TableCell>
-                          {quote.quote_amount ? `£${quote.quote_amount.toFixed(2)}` : "-"}
-                        </TableCell>
-                        <TableCell>
-                          <div className="flex gap-2">
-                            <Button
-                              size="sm"
-                              variant="outline"
-                              onClick={() => handleViewQuote(quote)}
-                            >
-                              View
-                            </Button>
-                            <Button
-                              size="sm"
-                              variant="destructive"
-                              onClick={() => handleDeleteQuote(quote.id)}
-                            >
-                              Delete
-                            </Button>
-                          </div>
-                        </TableCell>
+              <>
+                {/* Desktop Table View */}
+                <div className="hidden lg:block overflow-x-auto">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Date</TableHead>
+                        <TableHead>Customer</TableHead>
+                        <TableHead>Service</TableHead>
+                        <TableHead>Address</TableHead>
+                        <TableHead>Status</TableHead>
+                        <TableHead>Quote Amount</TableHead>
+                        <TableHead>Actions</TableHead>
                       </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </div>
+                    </TableHeader>
+                    <TableBody>
+                      {filteredQuotes.map((quote) => (
+                        <TableRow key={quote.id}>
+                          <TableCell className="whitespace-nowrap">
+                            {new Date(quote.created_at).toLocaleDateString()}
+                          </TableCell>
+                          <TableCell>
+                            <div className="flex flex-col">
+                              <span className="font-medium">{quote.email}</span>
+                              <span className="text-sm text-gray-500">{quote.phone}</span>
+                            </div>
+                          </TableCell>
+                          <TableCell className="capitalize">
+                            {quote.service_type.replace(/([A-Z])/g, " $1").trim()}
+                          </TableCell>
+                          <TableCell className="max-w-xs truncate">
+                            {quote.address}
+                          </TableCell>
+                          <TableCell>
+                            <Badge className={statusColors[quote.status]}>
+                              {quote.status}
+                            </Badge>
+                          </TableCell>
+                          <TableCell>
+                            {quote.quote_amount ? `£${quote.quote_amount.toFixed(2)}` : "-"}
+                          </TableCell>
+                          <TableCell>
+                            <div className="flex gap-2">
+                              <Button
+                                size="sm"
+                                variant="outline"
+                                onClick={() => handleViewQuote(quote)}
+                              >
+                                View
+                              </Button>
+                              <Button
+                                size="sm"
+                                variant="destructive"
+                                onClick={() => handleDeleteQuote(quote.id)}
+                              >
+                                Delete
+                              </Button>
+                            </div>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
+
+                {/* Mobile Card View */}
+                <div className="lg:hidden space-y-4">
+                  {filteredQuotes.map((quote) => (
+                    <Card key={quote.id} className="p-4">
+                      <div className="space-y-3">
+                        <div className="flex justify-between items-start">
+                          <div className="flex-1">
+                            <div className="flex items-center gap-2 mb-1">
+                              <Badge className={statusColors[quote.status]}>
+                                {quote.status}
+                              </Badge>
+                              <span className="text-sm text-gray-500">
+                                {new Date(quote.created_at).toLocaleDateString()}
+                              </span>
+                            </div>
+                            <h3 className="font-medium text-sm">{quote.email}</h3>
+                            <p className="text-xs text-gray-500">{quote.phone}</p>
+                          </div>
+                          {quote.quote_amount && (
+                            <div className="text-right">
+                              <span className="font-medium">£{quote.quote_amount.toFixed(2)}</span>
+                            </div>
+                          )}
+                        </div>
+                        
+                        <div className="space-y-1">
+                          <p className="text-sm">
+                            <span className="font-medium">Service:</span>{' '}
+                            <span className="capitalize">
+                              {quote.service_type.replace(/([A-Z])/g, " $1").trim()}
+                            </span>
+                          </p>
+                          <p className="text-sm">
+                            <span className="font-medium">Address:</span>{' '}
+                            <span className="truncate block">{quote.address}</span>
+                          </p>
+                        </div>
+                        
+                        <div className="flex gap-2 pt-2">
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => handleViewQuote(quote)}
+                            className="flex-1"
+                          >
+                            View Details
+                          </Button>
+                          <Button
+                            size="sm"
+                            variant="destructive"
+                            onClick={() => handleDeleteQuote(quote.id)}
+                          >
+                            Delete
+                          </Button>
+                        </div>
+                      </div>
+                    </Card>
+                  ))}
+                </div>
+              </>
             )}
           </CardContent>
         </Card>
@@ -314,7 +377,7 @@ const AdminDashboard = () => {
 
       {/* Quote Details Dialog */}
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto mx-4 sm:mx-0">
           <DialogHeader>
             <DialogTitle>Quote Details</DialogTitle>
             <DialogDescription>
@@ -478,11 +541,11 @@ const AdminDashboard = () => {
             </div>
           )}
 
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setDialogOpen(false)}>
+          <DialogFooter className="flex-col sm:flex-row gap-2">
+            <Button variant="outline" onClick={() => setDialogOpen(false)} className="w-full sm:w-auto">
               Cancel
             </Button>
-            <Button onClick={handleUpdateQuote}>Save Changes</Button>
+            <Button onClick={handleUpdateQuote} className="w-full sm:w-auto">Save Changes</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
