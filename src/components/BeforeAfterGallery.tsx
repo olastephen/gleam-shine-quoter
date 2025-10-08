@@ -2,6 +2,8 @@ import before1 from "@/assets/gallery/before-new.jpg";
 import after1 from "@/assets/gallery/after-new.jpg";
 import before2 from "@/assets/gallery/before-2.jpg";
 import after2 from "@/assets/gallery/after-2.mp4";
+import before3 from "@/assets/gallery/before-3.jpg";
+import after3 from "@/assets/gallery/after-3.mp4";
 
 const BeforeAfterGallery = () => {
   const transformations = [
@@ -12,6 +14,10 @@ const BeforeAfterGallery = () => {
     {
       before: { src: before2, alt: "Before cleaning - Dirty microwave and kitchen" },
       after: { src: after2, alt: "After cleaning - Sparkling clean appliances", type: "video" }
+    },
+    {
+      before: { src: before3, alt: "Before cleaning - Dirty outdoor area" },
+      after: { src: after3, alt: "After cleaning - Clean outdoor space", type: "video" }
     }
   ];
 
