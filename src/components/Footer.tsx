@@ -9,7 +9,7 @@ const Footer = () => {
           <div className="space-y-4">
             <img src={logo} alt="Freshshine Solutions" className="h-10 md:h-12 w-auto" />
             <p className="text-xs md:text-sm text-muted-foreground">
-              Professional cleaning services you can trust. Serving the Greater Manchester area since 2020.
+              Professional cleaning services you can trust. Serving across England including Greater Manchester, London, Birmingham, Leicester, Northampton, and Leeds.
             </p>
             <div className="flex gap-3">
               <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-primary/10 hover:bg-primary/20 text-primary transition-all duration-300 hover:scale-110">
@@ -57,7 +57,7 @@ const Footer = () => {
               </li>
               <li className="flex items-center gap-2">
                 <MapPin className="h-4 w-4 text-primary flex-shrink-0" />
-                <span>Manchester, UK</span>
+                <span>47 Glenridding Close, Oldham, OL1 3JU</span>
               </li>
             </ul>
           </div>

@@ -6,10 +6,10 @@ const LocationMap = () => {
       <div className="container mx-auto">
         <div className="text-center mb-8 md:mb-12 animate-fade-in">
           <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">
-            Serving Greater Manchester
+            Serving Across England
           </h2>
           <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
-            We cover all areas across Greater Manchester
+            From Greater Manchester to London, Birmingham, Leicester, Northampton, and Leeds
           </p>
         </div>
 
@@ -36,7 +36,9 @@ const LocationMap = () => {
                 <div>
                   <h3 className="font-semibold text-base md:text-lg text-foreground mb-2">Coverage Areas</h3>
                   <p className="text-sm md:text-base text-muted-foreground">
-                    Manchester City Centre • Salford • Trafford • Stockport • Bolton • Bury • Rochdale • Oldham • Tameside • Wigan
+                    <strong>Greater Manchester:</strong> Manchester City Centre • Salford • Trafford • Stockport • Bolton • Bury • Rochdale • Oldham • Tameside • Wigan
+                    <br /><br />
+                    <strong>Additional Cities:</strong> London • Birmingham • Northampton • Leicester • Leeds
                   </p>
                 </div>
               </div>
@@ -61,7 +63,13 @@ const LocationMap = () => {
             </div>
 
             <div className="p-4 md:p-6 bg-gradient-to-br from-accent/10 to-primary/10 backdrop-blur-sm border border-glass-border rounded-xl hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-              <h3 className="font-semibold text-base md:text-lg text-foreground mb-2">Service Hours</h3>
+              <h3 className="font-semibold text-base md:text-lg text-foreground mb-2">Company Address</h3>
+              <p className="text-sm md:text-base text-muted-foreground">
+                47 Glenridding Close<br />
+                Oldham<br />
+                OL1 3JU
+              </p>
+              <h3 className="font-semibold text-base md:text-lg text-foreground mb-2 mt-4">Service Hours</h3>
               <p className="text-sm md:text-base text-muted-foreground">
                 Monday - Saturday: 7:00 AM - 8:00 PM<br />
                 Sunday: 9:00 AM - 6:00 PM
