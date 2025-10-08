@@ -1,5 +1,10 @@
 import { Star } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import customer1 from "@/assets/customer-1.png";
+import customer2 from "@/assets/customer-2.png";
+import customer3 from "@/assets/customer-3.png";
+import customer4 from "@/assets/customer-4.png";
+import customer5 from "@/assets/customer-5.png";
 
 const Testimonials = () => {
   const testimonials = [
@@ -9,7 +14,7 @@ const Testimonials = () => {
       rating: 5,
       text: "Absolutely brilliant service! The team was professional, punctual, and my flat looked spotless. I'll definitely be booking again.",
       service: "Domestic Cleaning",
-      avatar: "👩🏻‍💼",
+      avatar: customer4,
       color: "from-primary/20 to-secondary/20"
     },
     {
@@ -18,7 +23,7 @@ const Testimonials = () => {
       rating: 5,
       text: "Used them for our office cleaning and couldn't be happier. Great attention to detail and very reliable. Highly recommend!",
       service: "Commercial Cleaning",
-      avatar: "👨🏼‍💼",
+      avatar: customer3,
       color: "from-secondary/20 to-primary/20"
     },
     {
@@ -27,7 +32,7 @@ const Testimonials = () => {
       rating: 5,
       text: "The end of lease clean was outstanding. Got my full deposit back thanks to their thorough work. Worth every penny!",
       service: "End of Lease",
-      avatar: "👩🏽‍🦱",
+      avatar: customer5,
       color: "from-primary/20 to-accent/20"
     },
     {
@@ -36,7 +41,7 @@ const Testimonials = () => {
       rating: 5,
       text: "Fantastic job on our student accommodation. Quick, efficient, and the price was very reasonable. Will use again next year!",
       service: "Student Accommodation",
-      avatar: "👨🏻‍🎓",
+      avatar: customer1,
       color: "from-accent/20 to-primary/20"
     }
   ];
@@ -62,7 +67,7 @@ const Testimonials = () => {
             >
               <CardContent className="p-4 md:p-6">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="text-4xl md:text-5xl">{testimonial.avatar}</div>
+                  <img src={testimonial.avatar} alt={testimonial.name} className="w-12 h-12 md:w-16 md:h-16 rounded-full object-cover border-2 border-primary/20" />
                   <div className="flex-1">
                     <div className="flex gap-1 mb-2">
                       {[...Array(testimonial.rating)].map((_, i) => (

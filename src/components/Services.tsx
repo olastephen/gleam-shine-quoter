@@ -1,4 +1,4 @@
-import { Home, Building2, KeyRound, GraduationCap, Hotel, Droplets } from "lucide-react";
+import { Home, Building2, KeyRound, GraduationCap, Hotel, Droplets, Trash2, Scissors } from "lucide-react";
 import ServiceCard from "./ServiceCard";
 
 const services = [
@@ -31,6 +31,16 @@ const services = [
     title: "Special Add-On Services",
     description: "Oven cleaning, window washing, carpet cleaning, and more specialized services.",
     icon: Droplets,
+  },
+  {
+    title: "Chewing Gum Removal",
+    description: "Professional removal of chewing gum from floors, pavements, and surfaces.",
+    icon: Trash2,
+  },
+  {
+    title: "Grass Cutting & Maintenance",
+    description: "Keep your outdoor spaces tidy with our professional grass cutting services.",
+    icon: Scissors,
   },
 ];
 

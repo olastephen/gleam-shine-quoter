@@ -2,6 +2,9 @@ import { Button } from "@/components/ui/button";
 import { Users, Sparkles } from "lucide-react";
 import heroImage from "@/assets/hero-cleaner.jpg";
 import logo from "@/assets/logo.png";
+import customer1 from "@/assets/customer-1.png";
+import customer2 from "@/assets/customer-2.png";
+import customer3 from "@/assets/customer-3.png";
 
 const Hero = () => {
   const scrollToBooking = () => {
@@ -33,9 +36,9 @@ const Hero = () => {
           </p>
           <div className="flex items-center gap-3">
             <div className="flex -space-x-2">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent border-2 border-background" />
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-accent to-secondary border-2 border-background" />
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-secondary to-primary border-2 border-background" />
+              <img src={customer1} alt="Happy customer" className="w-10 h-10 rounded-full border-2 border-background object-cover" />
+              <img src={customer2} alt="Happy customer" className="w-10 h-10 rounded-full border-2 border-background object-cover" />
+              <img src={customer3} alt="Happy customer" className="w-10 h-10 rounded-full border-2 border-background object-cover" />
             </div>
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <Users className="h-4 w-4" />
