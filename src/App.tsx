@@ -9,6 +9,8 @@ import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 
+
+
 const queryClient = new QueryClient();
 
 const App = () => (
