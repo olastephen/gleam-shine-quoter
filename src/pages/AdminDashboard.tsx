@@ -141,11 +141,13 @@ const AdminDashboard = () => {
     }
 
     try {
-      // Note: This creates a new auth user and sends a confirmation email
-      // The user will need to confirm their email before they can login
+      // Create user without email confirmation (as configured in Supabase settings)
       const { data: authData, error: authError } = await supabase.auth.signUp({
         email: newUserEmail,
         password: newUserPassword,
+        options: {
+          emailRedirectTo: undefined, // No email confirmation needed
+        }
       });
 
       if (authError) throw authError;
@@ -163,7 +165,7 @@ const AdminDashboard = () => {
 
         if (insertError) throw insertError;
 
-        toast.success("Admin user invited successfully. They will receive a confirmation email.");
+        toast.success(`Admin user created successfully. Email: ${newUserEmail}`);
         setUserDialogOpen(false);
         setNewUserEmail("");
         setNewUserFullName("");
