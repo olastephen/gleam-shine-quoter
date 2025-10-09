@@ -34,6 +34,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
 import { LogOut, FileText, Phone, Mail, MapPin, Calendar, Clock, Home, Bath, Bed, UserPlus, Users, Wrench } from "lucide-react";
 import type { Tables } from "@/integrations/supabase/types";
+import logo from "@/assets/logo.png";
 
 type Quote = Tables<"quotes">;
 type AdminUser = Tables<"admin_users">;
@@ -264,7 +265,7 @@ const AdminDashboard = () => {
       <header className="bg-white shadow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
           <div className="flex items-center gap-3">
-            <img src="/src/assets/logo.png" alt="Fresh Shine Solutions" className="h-10 sm:h-12" />
+            <img src={logo} alt="Fresh Shine Solutions" className="h-10 sm:h-12" />
             <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Admin Dashboard</h1>
           </div>
           <Button onClick={handleLogout} variant="outline" size="sm">
