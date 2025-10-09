@@ -11,9 +11,9 @@
 -- Example: Add admin metadata for a user
 INSERT INTO public.admin_users (id, email, full_name, role)
 VALUES (
-  'USER_UUID_HERE',  -- Replace with actual user UUID from auth.users
-  'admin@example.com',  -- Replace with actual admin email
-  'Admin Name',  -- Replace with actual admin name
+  '7a1b1d0f-4dce-4e13-8d38-1f19635797dc',  -- Replace with actual user UUID from auth.users
+  'freshshinesolutions5@gmail.com',  -- Replace with actual admin email
+  'Deolinda',  -- Replace with actual admin name
   'admin'  -- Can be 'admin' or 'super_admin'
 )
 ON CONFLICT (id) DO UPDATE 
