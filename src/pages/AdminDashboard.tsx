@@ -68,8 +68,8 @@ const AdminDashboard = () => {
     fetchQuotes();
     fetchAdminUsers();
 
-    // Subscribe to real-time updates
-    const channel = supabase
+    // Subscribe to real-time updates for quotes
+    const quotesChannel = supabase
       .channel("quotes_changes")
       .on(
         "postgres_changes",
@@ -80,8 +80,21 @@ const AdminDashboard = () => {
       )
       .subscribe();
 
+    // Subscribe to real-time updates for admin users
+    const usersChannel = supabase
+      .channel("admin_users_changes")
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "admin_users" },
+        () => {
+          fetchAdminUsers();
+        }
+      )
+      .subscribe();
+
     return () => {
-      supabase.removeChannel(channel);
+      supabase.removeChannel(quotesChannel);
+      supabase.removeChannel(usersChannel);
     };
   }, []);
 
@@ -91,11 +104,20 @@ const AdminDashboard = () => {
       navigate("/admin/login");
     } else {
       // Get current user's role
-      const { data: userData } = await supabase
+      const { data: userData, error } = await supabase
         .from("admin_users")
         .select("role")
         .eq("id", session.user.id)
         .single();
+      
+      if (error) {
+        console.error("Error fetching user role:", error);
+        // If user not in admin_users table, log them out
+        await supabase.auth.signOut();
+        navigate("/admin/login");
+        toast.error("Unauthorized access");
+        return;
+      }
       
       if (userData) {
         setCurrentUserRole(userData.role);
@@ -268,7 +290,7 @@ const AdminDashboard = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
           <div className="flex items-center gap-3">
             <img src={logo} alt="Fresh Shine Solutions" className="h-10 sm:h-12" />
-            <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Admin Dashboard</h1>
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Admin Dashboard</h1>
           </div>
           <Button onClick={handleLogout} variant="outline" size="sm">
             <LogOut className="h-4 w-4 sm:mr-2" />
@@ -350,65 +372,65 @@ const AdminDashboard = () => {
           </TabsList>
 
           <TabsContent value="quotes" className="space-y-6">
-            {/* Stats Cards */}
+        {/* Stats Cards */}
             <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4">
-              <Card>
-                <CardHeader className="pb-2">
-                  <CardDescription className="text-xs sm:text-sm">Total Quotes</CardDescription>
-                  <CardTitle className="text-2xl sm:text-3xl">{stats.total}</CardTitle>
-                </CardHeader>
-              </Card>
-              <Card>
-                <CardHeader className="pb-2">
-                  <CardDescription className="text-xs sm:text-sm">Pending</CardDescription>
-                  <CardTitle className="text-2xl sm:text-3xl text-yellow-600">{stats.pending}</CardTitle>
-                </CardHeader>
-              </Card>
-              <Card>
-                <CardHeader className="pb-2">
-                  <CardDescription className="text-xs sm:text-sm">Contacted</CardDescription>
-                  <CardTitle className="text-2xl sm:text-3xl text-blue-600">{stats.contacted}</CardTitle>
-                </CardHeader>
-              </Card>
-              <Card>
-                <CardHeader className="pb-2">
-                  <CardDescription className="text-xs sm:text-sm">Quoted</CardDescription>
-                  <CardTitle className="text-2xl sm:text-3xl text-purple-600">{stats.quoted}</CardTitle>
-                </CardHeader>
-              </Card>
-              <Card className="col-span-2 lg:col-span-1">
-                <CardHeader className="pb-2">
-                  <CardDescription className="text-xs sm:text-sm">Approved</CardDescription>
-                  <CardTitle className="text-2xl sm:text-3xl text-green-600">{stats.approved}</CardTitle>
-                </CardHeader>
-              </Card>
-            </div>
+          <Card>
+            <CardHeader className="pb-2">
+              <CardDescription className="text-xs sm:text-sm">Total Quotes</CardDescription>
+              <CardTitle className="text-2xl sm:text-3xl">{stats.total}</CardTitle>
+            </CardHeader>
+          </Card>
+          <Card>
+            <CardHeader className="pb-2">
+              <CardDescription className="text-xs sm:text-sm">Pending</CardDescription>
+              <CardTitle className="text-2xl sm:text-3xl text-yellow-600">{stats.pending}</CardTitle>
+            </CardHeader>
+          </Card>
+          <Card>
+            <CardHeader className="pb-2">
+              <CardDescription className="text-xs sm:text-sm">Contacted</CardDescription>
+              <CardTitle className="text-2xl sm:text-3xl text-blue-600">{stats.contacted}</CardTitle>
+            </CardHeader>
+          </Card>
+          <Card>
+            <CardHeader className="pb-2">
+              <CardDescription className="text-xs sm:text-sm">Quoted</CardDescription>
+              <CardTitle className="text-2xl sm:text-3xl text-purple-600">{stats.quoted}</CardTitle>
+            </CardHeader>
+          </Card>
+          <Card className="col-span-2 lg:col-span-1">
+            <CardHeader className="pb-2">
+              <CardDescription className="text-xs sm:text-sm">Approved</CardDescription>
+              <CardTitle className="text-2xl sm:text-3xl text-green-600">{stats.approved}</CardTitle>
+            </CardHeader>
+          </Card>
+        </div>
 
-            {/* Filter */}
+        {/* Filter */}
             <Card>
-              <CardHeader className="pb-3">
-                <CardTitle className="text-lg">Filter Quotes</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <Select value={filterStatus} onValueChange={setFilterStatus}>
-                  <SelectTrigger className="w-full sm:w-64">
-                    <SelectValue placeholder="Filter by status" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Quotes</SelectItem>
-                    <SelectItem value="pending">Pending</SelectItem>
-                    <SelectItem value="contacted">Contacted</SelectItem>
-                    <SelectItem value="quoted">Quoted</SelectItem>
-                    <SelectItem value="approved">Approved</SelectItem>
-                    <SelectItem value="rejected">Rejected</SelectItem>
-                    <SelectItem value="completed">Completed</SelectItem>
-                  </SelectContent>
-                </Select>
-              </CardContent>
-            </Card>
+          <CardHeader className="pb-3">
+            <CardTitle className="text-lg">Filter Quotes</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <Select value={filterStatus} onValueChange={setFilterStatus}>
+              <SelectTrigger className="w-full sm:w-64">
+                <SelectValue placeholder="Filter by status" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Quotes</SelectItem>
+                <SelectItem value="pending">Pending</SelectItem>
+                <SelectItem value="contacted">Contacted</SelectItem>
+                <SelectItem value="quoted">Quoted</SelectItem>
+                <SelectItem value="approved">Approved</SelectItem>
+                <SelectItem value="rejected">Rejected</SelectItem>
+                <SelectItem value="completed">Completed</SelectItem>
+              </SelectContent>
+            </Select>
+          </CardContent>
+        </Card>
 
-            {/* Quotes Table */}
-            <Card>
+        {/* Quotes Table */}
+        <Card>
           <CardHeader>
             <CardTitle className="text-lg">All Quote Requests</CardTitle>
             <CardDescription className="text-sm">
