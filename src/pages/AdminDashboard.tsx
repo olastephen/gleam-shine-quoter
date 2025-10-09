@@ -554,15 +554,15 @@ const AdminDashboard = () => {
           <TabsContent value="users" className="space-y-6">
             <Card>
               <CardHeader>
-                <div className="flex justify-between items-center">
-                  <div>
+                <div className="flex justify-between items-center gap-2">
+                  <div className="flex-1">
                     <CardTitle className="text-lg">Admin Users</CardTitle>
-                    <CardDescription>Manage administrator access</CardDescription>
+                    <CardDescription className="hidden sm:block">Manage administrator access</CardDescription>
                   </div>
                   {currentUserRole === "super_admin" && (
                     <Button onClick={() => setUserDialogOpen(true)} size="sm">
-                      <UserPlus className="h-4 w-4 mr-2" />
-                      Add User
+                      <UserPlus className="h-4 w-4 sm:mr-2" />
+                      <span className="hidden sm:inline">Add User</span>
                     </Button>
                   )}
                 </div>
@@ -571,46 +571,86 @@ const AdminDashboard = () => {
                 {adminUsers.length === 0 ? (
                   <div className="text-center py-8 text-gray-500">No admin users found</div>
                 ) : (
-                  <div className="space-y-4">
-                    <Table>
-                      <TableHeader>
-                        <TableRow>
-                          <TableHead>Email</TableHead>
-                          <TableHead>Full Name</TableHead>
-                          <TableHead>Role</TableHead>
-                          <TableHead>Created</TableHead>
-                          {currentUserRole === "super_admin" && <TableHead>Actions</TableHead>}
-                        </TableRow>
-                      </TableHeader>
-                      <TableBody>
-                        {adminUsers.map((user) => (
-                          <TableRow key={user.id}>
-                            <TableCell>{user.email}</TableCell>
-                            <TableCell>{user.full_name || "-"}</TableCell>
-                            <TableCell>
-                              <Badge variant={user.role === "super_admin" ? "default" : "secondary"}>
-                                {user.role}
-                              </Badge>
-                            </TableCell>
-                            <TableCell>
-                              {new Date(user.created_at).toLocaleDateString()}
-                            </TableCell>
-                            {currentUserRole === "super_admin" && (
+                  <>
+                    {/* Desktop Table View */}
+                    <div className="hidden md:block">
+                      <Table>
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead>Email</TableHead>
+                            <TableHead>Full Name</TableHead>
+                            <TableHead>Role</TableHead>
+                            <TableHead>Created</TableHead>
+                            {currentUserRole === "super_admin" && <TableHead>Actions</TableHead>}
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                          {adminUsers.map((user) => (
+                            <TableRow key={user.id}>
+                              <TableCell>{user.email}</TableCell>
+                              <TableCell>{user.full_name || "-"}</TableCell>
                               <TableCell>
+                                <Badge variant={user.role === "super_admin" ? "default" : "secondary"}>
+                                  {user.role}
+                                </Badge>
+                              </TableCell>
+                              <TableCell>
+                                {new Date(user.created_at).toLocaleDateString()}
+                              </TableCell>
+                              {currentUserRole === "super_admin" && (
+                                <TableCell>
+                                  <Button
+                                    size="sm"
+                                    variant="destructive"
+                                    onClick={() => handleDeleteUser(user.id)}
+                                  >
+                                    Delete
+                                  </Button>
+                                </TableCell>
+                              )}
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </div>
+
+                    {/* Mobile Card View */}
+                    <div className="md:hidden space-y-4">
+                      {adminUsers.map((user) => (
+                        <Card key={user.id} className="p-4">
+                          <div className="space-y-3">
+                            <div className="flex justify-between items-start">
+                              <div className="flex-1">
+                                <div className="flex items-center gap-2 mb-1">
+                                  <Badge variant={user.role === "super_admin" ? "default" : "secondary"}>
+                                    {user.role}
+                                  </Badge>
+                                  <span className="text-sm text-gray-500">
+                                    {new Date(user.created_at).toLocaleDateString()}
+                                  </span>
+                                </div>
+                                <h3 className="font-medium text-sm break-all">{user.email}</h3>
+                                <p className="text-xs text-gray-500">{user.full_name || "No name"}</p>
+                              </div>
+                            </div>
+                            
+                            {currentUserRole === "super_admin" && (
+                              <div className="pt-2">
                                 <Button
                                   size="sm"
                                   variant="destructive"
                                   onClick={() => handleDeleteUser(user.id)}
+                                  className="w-full"
                                 >
-                                  Delete
+                                  Delete User
                                 </Button>
-                              </TableCell>
+                              </div>
                             )}
-                          </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  </div>
+                          </div>
+                        </Card>
+                      ))}
+                    </div>
+                  </>
                 )}
               </CardContent>
             </Card>
