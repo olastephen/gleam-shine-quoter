@@ -181,34 +181,32 @@ const AdminDashboard = () => {
       if (authError) throw authError;
 
       if (authData.user) {
-        // Add user to admin_users table directly
-        const { error: insertError } = await supabase
-          .from("admin_users")
-          .insert({
-            id: authData.user.id,
-            email: newUserEmail,
-            full_name: newUserFullName || null,
-            role: newUserRole,
-          });
+        // Use the secure database function to create admin user
+        const { data: functionResult, error: functionError } = await supabase.rpc('create_admin_user', {
+          user_id: authData.user.id,
+          user_email: newUserEmail,
+          user_full_name: newUserFullName || null,
+          user_role: newUserRole
+        });
 
-        if (insertError) {
-          console.error("Insert error details:", insertError);
-          // If it's an RLS policy error, provide a more helpful message
-          if (insertError.message.includes("row-level security policy")) {
-            toast.error("Access denied. Please ensure you are logged in as a super admin user.");
-          } else {
-            throw insertError;
-          }
+        if (functionError) {
+          console.error("Function error details:", functionError);
+          // The function provides clear error messages
+          toast.error(functionError.message || "Failed to create admin user");
           return;
         }
 
-        toast.success(`Admin user created successfully. Email: ${newUserEmail}`);
-        setUserDialogOpen(false);
-        setNewUserEmail("");
-        setNewUserFullName("");
-        setNewUserPassword("");
-        setNewUserRole("admin");
-        fetchAdminUsers();
+        if (functionResult && functionResult.success) {
+          toast.success(`Admin user created successfully. Email: ${newUserEmail}`);
+          setUserDialogOpen(false);
+          setNewUserEmail("");
+          setNewUserFullName("");
+          setNewUserPassword("");
+          setNewUserRole("admin");
+          fetchAdminUsers();
+        } else {
+          toast.error("Failed to create admin user - unexpected response");
+        }
       }
     } catch (error: any) {
       console.error("Error creating user:", error);
