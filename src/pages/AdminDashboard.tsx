@@ -169,24 +169,6 @@ const AdminDashboard = () => {
     }
 
     try {
-      // First, let's verify the current user's role in the database
-      const { data: currentUserData, error: currentUserError } = await supabase
-        .from("admin_users")
-        .select("role")
-        .eq("id", (await supabase.auth.getUser()).data.user?.id)
-        .single();
-
-      if (currentUserError) {
-        console.error("Error verifying current user role:", currentUserError);
-        toast.error("Unable to verify user permissions");
-        return;
-      }
-
-      if (currentUserData?.role !== "super_admin") {
-        toast.error("Access denied. Only super admin users can create admin users.");
-        return;
-      }
-
       // Create user without email confirmation (as configured in Supabase settings)
       const { data: authData, error: authError } = await supabase.auth.signUp({
         email: newUserEmail,
@@ -199,7 +181,7 @@ const AdminDashboard = () => {
       if (authError) throw authError;
 
       if (authData.user) {
-        // Add user to admin_users table
+        // Add user to admin_users table directly
         const { error: insertError } = await supabase
           .from("admin_users")
           .insert({
@@ -211,7 +193,13 @@ const AdminDashboard = () => {
 
         if (insertError) {
           console.error("Insert error details:", insertError);
-          throw insertError;
+          // If it's an RLS policy error, provide a more helpful message
+          if (insertError.message.includes("row-level security policy")) {
+            toast.error("Access denied. Please ensure you are logged in as a super admin user.");
+          } else {
+            throw insertError;
+          }
+          return;
         }
 
         toast.success(`Admin user created successfully. Email: ${newUserEmail}`);
