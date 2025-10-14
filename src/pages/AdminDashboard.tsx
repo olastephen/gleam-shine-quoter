@@ -310,7 +310,7 @@ const AdminDashboard = () => {
             <CardDescription>Technology stack and services</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6">
               <a 
                 href="https://vercel.com" 
                 target="_blank" 
@@ -360,6 +360,36 @@ const AdminDashboard = () => {
                 <img src="https://cdn.trustpilot.net/brand-assets/4.1.0/logo-black.svg" alt="Trustpilot" className="h-10 w-10 mb-2" />
                 <p className="text-sm font-medium">Trustpilot</p>
                 <p className="text-xs text-gray-500">Reviews</p>
+              </a>
+              <a 
+                href="https://analytics.google.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+              >
+                <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="Google Analytics" className="h-10 w-10 mb-2" />
+                <p className="text-sm font-medium">Google Analytics</p>
+                <p className="text-xs text-gray-500">Analytics</p>
+              </a>
+              <a 
+                href="https://search.google.com/search-console" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+              >
+                <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="Google Search Console" className="h-10 w-10 mb-2" />
+                <p className="text-sm font-medium">Google Search Console</p>
+                <p className="text-xs text-gray-500">SEO</p>
+              </a>
+              <a 
+                href="https://www.bing.com/webmasters" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+              >
+                <img src="https://www.bing.com/sa/simg/bing_p_rr_teal_min.ico" alt="Bing Webmaster Tools" className="h-10 w-10 mb-2" />
+                <p className="text-sm font-medium">Bing Search Console</p>
+                <p className="text-xs text-gray-500">SEO</p>
               </a>
             </div>
           </CardContent>

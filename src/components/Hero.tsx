@@ -26,12 +26,12 @@ const Hero = () => {
         <img src={logo} alt="" className="w-full h-full object-contain" />
       </div>
 
-      <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center">
-        <div className="space-y-6 z-10 animate-fade-in">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
+      <div className="container mx-auto grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+        <div className="space-y-4 md:space-y-6 z-10 animate-fade-in">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
             Professional Domestic and Commercial Cleaning Services
           </h1>
-          <p className="text-lg text-muted-foreground max-w-xl">
+          <p className="text-base md:text-lg text-muted-foreground max-w-xl">
             Cleaning and handyman tasks booked and performed by experienced providers who are highly rated by customers like you.
           </p>
           <div className="flex items-center gap-3">
@@ -45,11 +45,11 @@ const Hero = () => {
               <span className="font-semibold">100+ Satisfied Customers</span>
             </div>
           </div>
-          <div className="flex gap-4 pt-4">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4">
             <Button 
               onClick={scrollToBooking} 
               size="lg" 
-              className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-xl hover:shadow-2xl transition-all hover:-translate-y-1"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-xl hover:shadow-2xl transition-all hover:-translate-y-1 w-full sm:w-auto"
             >
               Book a Clean
             </Button>
@@ -57,7 +57,7 @@ const Hero = () => {
               onClick={scrollToBooking} 
               variant="outline" 
               size="lg" 
-              className="bg-card/60 backdrop-blur-lg border-glass-border hover:bg-card/80 transition-all hover:-translate-y-1"
+              className="bg-card/60 backdrop-blur-lg border-glass-border hover:bg-card/80 transition-all hover:-translate-y-1 w-full sm:w-auto"
             >
               Get a Quote
             </Button>
@@ -71,16 +71,16 @@ const Hero = () => {
               className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
             />
           </div>
-          <div className="absolute top-10 -left-4 bg-card/80 backdrop-blur-lg border border-glass-border rounded-xl shadow-xl p-4 animate-pulse">
+          <div className="absolute top-4 sm:top-10 -left-2 sm:-left-4 bg-card/80 backdrop-blur-lg border border-glass-border rounded-xl shadow-xl p-3 sm:p-4 animate-pulse">
             <div className="flex items-center gap-2">
-              <Sparkles className="h-5 w-5 text-accent" />
-              <span className="font-semibold text-sm text-foreground">Spotless Results</span>
+              <Sparkles className="h-4 w-4 sm:h-5 sm:w-5 text-accent" />
+              <span className="font-semibold text-xs sm:text-sm text-foreground">Spotless Results</span>
             </div>
           </div>
-          <div className="absolute bottom-10 -right-4 bg-card/80 backdrop-blur-lg border border-glass-border rounded-xl shadow-xl p-4 animate-pulse" style={{ animationDelay: "150ms" }}>
+          <div className="absolute bottom-4 sm:bottom-10 -right-2 sm:-right-4 bg-card/80 backdrop-blur-lg border border-glass-border rounded-xl shadow-xl p-3 sm:p-4 animate-pulse" style={{ animationDelay: "150ms" }}>
             <div className="flex items-center gap-2">
-              <Users className="h-5 w-5 text-accent" />
-              <span className="font-semibold text-sm text-foreground">Industry Experts</span>
+              <Users className="h-4 w-4 sm:h-5 sm:w-5 text-accent" />
+              <span className="font-semibold text-xs sm:text-sm text-foreground">Industry Experts</span>
             </div>
           </div>
         </div>

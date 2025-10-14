@@ -94,7 +94,7 @@ const BookingForm = () => {
           <CardContent className="space-y-6">
             <div className="space-y-4">
               <Label className="text-base font-semibold">Select Service Type</Label>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                 {services.map((service) => {
                   const Icon = service.icon;
                   return (
@@ -109,7 +109,7 @@ const BookingForm = () => {
                       }`}
                     >
                       <Icon className={`h-8 w-8 ${selectedService === service.id ? "text-accent" : "text-muted-foreground"}`} />
-                      <span className="text-xs text-center font-medium">{service.label}</span>
+                      <span className="text-xs sm:text-sm text-center font-medium">{service.label}</span>
                     </button>
                   );
                 })}
