@@ -374,6 +374,37 @@ const AdminDashboard = () => {
                 <p className="text-sm font-medium">Trustpilot</p>
                 <p className="text-xs text-gray-500">Reviews</p>
               </a>
+              {/* Social Tools */}
+              <a 
+                href="https://www.facebook.com/freshshinesolutions" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+              >
+                <img src="https://www.facebook.com/favicon.ico" alt="Facebook" className="h-10 w-10 mb-2" />
+                <p className="text-sm font-medium">Facebook</p>
+                <p className="text-xs text-gray-500">Social</p>
+              </a>
+              <a 
+                href="https://www.tiktok.com/@freshshinesolutions" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+              >
+                <img src="https://www.tiktok.com/favicon.ico" alt="TikTok" className="h-10 w-10 mb-2" />
+                <p className="text-sm font-medium">TikTok</p>
+                <p className="text-xs text-gray-500">Social</p>
+              </a>
+              <a 
+                href="https://www.instagram.com/freshshinesolutions/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+              >
+                <img src="https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png" alt="Instagram" className="h-10 w-10 mb-2" />
+                <p className="text-sm font-medium">Instagram</p>
+                <p className="text-xs text-gray-500">Social</p>
+              </a>
               <a 
                 href="https://analytics.google.com" 
                 target="_blank" 
