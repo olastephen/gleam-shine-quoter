@@ -406,6 +406,16 @@ const AdminDashboard = () => {
                 <p className="text-xs text-gray-500">Social</p>
               </a>
               <a 
+                href="https://x.com/freshshinesolut" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+              >
+                <img src="https://abs.twimg.com/favicons/twitter.2.ico" alt="X (Twitter)" className="h-10 w-10 mb-2" />
+                <p className="text-sm font-medium">X (Twitter)</p>
+                <p className="text-xs text-gray-500">Social</p>
+              </a>
+              <a 
                 href="https://analytics.google.com" 
                 target="_blank" 
                 rel="noopener noreferrer"

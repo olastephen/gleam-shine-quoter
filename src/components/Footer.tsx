@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
+import { Mail, Phone, MapPin, Facebook, Instagram, Twitter, Music2 } from "lucide-react";
 import logo from "@/assets/logo.png";
 
 const Footer = () => {
@@ -19,6 +19,9 @@ const Footer = () => {
                 <Instagram className="h-4 w-4" />
               </a>
               <a href="https://www.tiktok.com/@freshshinesolutions" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-primary/10 hover:bg-primary/20 text-primary transition-all duration-300 hover:scale-110">
+                <Music2 className="h-4 w-4" />
+              </a>
+              <a href="https://x.com/freshshinesolut" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-primary/10 hover:bg-primary/20 text-primary transition-all duration-300 hover:scale-110">
                 <Twitter className="h-4 w-4" />
               </a>
             </div>
